@@ -177,7 +177,7 @@ public final class DigitalTwinsClientBuilder {
                 this.properties);
         }
 
-        return new DigitalTwinsAsyncClient(this.httpPipeline, serviceVersion, this.endpoint);
+        return new DigitalTwinsAsyncClient(this.httpPipeline, this.endpoint);
     }
 
     /**

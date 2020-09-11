@@ -43,15 +43,14 @@ import static com.azure.core.util.FluxUtil.withContext;
  * the digital twin models and event routes tied to your Azure Digital Twins instance.
  * </p>
  */
-@ServiceClient(builder = DigitalTwinsClientBuilder.class)
+@ServiceClient(builder = DigitalTwinsClientBuilder.class, isAsync = true)
 public final class DigitalTwinsAsyncClient {
     private static final ClientLogger logger = new ClientLogger(DigitalTwinsAsyncClient.class);
     private static final ObjectMapper mapper = new ObjectMapper();
-    private final DigitalTwinsServiceVersion serviceVersion;
     private final AzureDigitalTwinsAPIImpl protocolLayer;
     private static final Boolean includeModelDefinitionOnGet = true;
 
-    DigitalTwinsAsyncClient(HttpPipeline pipeline, DigitalTwinsServiceVersion serviceVersion, String host) {
+    DigitalTwinsAsyncClient(HttpPipeline pipeline, String host) {
         final SimpleModule stringModule = new SimpleModule("String Serializer");
         stringModule.addSerializer(new DigitalTwinsStringSerializer(String.class, mapper));
 
@@ -63,28 +62,6 @@ public final class DigitalTwinsAsyncClient {
             .pipeline(pipeline)
             .serializerAdapter(jacksonAdapter)
             .buildClient();
-        this.serviceVersion = serviceVersion;
-    }
-
-    /**
-     * Gets the Azure Digital Twins service API version that this client is configured to use for all service requests.
-     * Unless configured while building this client through {@link DigitalTwinsClientBuilder#serviceVersion(DigitalTwinsServiceVersion)},
-     * this value will be equal to the latest service API version supported by this client.
-     *
-     * @return The Azure Digital Twins service API version.
-     */
-    public DigitalTwinsServiceVersion getServiceVersion() {
-        return this.serviceVersion;
-    }
-
-    /**
-     * Gets the {@link HttpPipeline} that this client is configured to use for all service requests. This pipeline can
-     * be customized while building this client through {@link DigitalTwinsClientBuilder#httpPipeline(HttpPipeline)}.
-     *
-     * @return The {@link HttpPipeline} that this client uses for all service requests.
-     */
-    public HttpPipeline getHttpPipeline() {
-        return this.protocolLayer.getHttpPipeline();
     }
 
     //region Digital twin APIs
