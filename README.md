@@ -111,3 +111,5 @@ Azure SDK for Java is licensed under the [MIT](LICENSE.txt) license.
 [jul_19_release_page]: https://azure.github.io/azure-sdk/releases/2019-07-10/java.html
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-java%2FREADME.png)
+
+<!-- GitAds-Verify: NWVP8VLGWXA2965LS8JHU26MI2EFK9FA -->
